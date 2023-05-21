@@ -9,7 +9,7 @@
     - name: Print os release
       ansible.builtin.debug:
         var: os_release
-    - name: Install utilitis Ubuntu|Debian
+    - name: Install utilitis (Ubuntu|Debian)
       become: true
       ansible.builtin.apt:
         pkg:          
@@ -28,25 +28,25 @@
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
       when: os_release.stdout.find('Ubuntu') != -1
-    - name: Add repository Docker Ubuntu
+    - name: Add repository Docker (Ubuntu)
       become: true
       ansible.builtin.apt_repository:
         repo: "deb https://download.docker.com/linux/ubuntu focal stable"
         state: present
       when: os_release.stdout.find('Ubuntu') != -1
-    - name: Add GPG key Docker.com Debian|Astra Linux
+    - name: Add GPG key Docker.com (Debian|Astra Linux)
       become: true
       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/debian/gpg
         state: present
       when: os_release.stdout.find('Astra Linux') != -1 or os_release.stdout.find('Debian') != -1
-    - name: Add repository Docker Debian|Astra Linux
+    - name: Add repository Docker (Debian|Astra Linux)
       become: true
       ansible.builtin.apt_repository:
         repo: "deb https://download.docker.com/linux/debian stretch stable"
         state: present
       when: os_release.stdout.find('Astra Linux') != -1 or os_release.stdout.find('Debian') != -1
-    - name: Install utilitis CentOS|Fedora
+    - name: Install utilitis (CentOS|Fedora)
       become: true
       ansible.builtin.yum:
         name:
@@ -57,7 +57,7 @@
       async: 90
       poll: 20
       when: os_release.stdout.find('CentOS') != -1 or os_release.stdout.find('Fedora') != -1
-    - name: Add GPG key Docker.com CentOS
+    - name: Add GPG key Docker.com (CentOS)
       become: true
       ansible.builtin.rpm_key:
         state: present
@@ -70,7 +70,7 @@
         description: docker-ce YUM repo
         baseurl: "https://download.docker.com/linux/centos/{{ CENTOS_VERSION }}/x86_64/stable/"
       when: os_release.stdout.find('CentOS') != -1
-    - name: Add GPG key Docker.com Fedora
+    - name: Add GPG key Docker.com (Fedora)
       become: true
       ansible.builtin.rpm_key:
         state: present

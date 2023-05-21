@@ -1,6 +1,0 @@
----
-all:
-  hosts:
-    srv:
-      ansible_host: "192.168.2.210"
-      ansible_user: "{{ ADMIN_USER }}"
