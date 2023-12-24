@@ -16,8 +16,14 @@ ADMIN_USER - Учетная запись для подключения к сер
 
 WORK_FOLDER - каталог для размещения docker манифестов
 
+FOLDER_DOCKER_COMPOSE - каталог загрузки двоичного файла Docker Compose 
+
 DOCKER_COMPOSE_VERSION - Устанавливаемая версия docker compose
 
-CENTOS_VERSION: - Версия репозитория для centos
+DOCKER_COMPOSE_ARCHITECTURE - архитектура процессора
 
-FEDORA_VERSION: Версия репозитория для fedora
+CENTOS_VERSION - Версия репозитория для centos
+
+FEDORA_VERSION - Версия репозитория для fedora
+
+UBUNTU_VERSION - Версия репозитория для ubuntu

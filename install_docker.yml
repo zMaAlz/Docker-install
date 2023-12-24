@@ -31,7 +31,7 @@
     - name: Add repository Docker (Ubuntu)
       become: true
       ansible.builtin.apt_repository:
-        repo: "deb https://download.docker.com/linux/ubuntu focal stable"
+        repo: "deb https://download.docker.com/linux/ubuntu {{ UBUNTU_VERSION }} stable"
         state: present
       when: os_release.stdout.find('Ubuntu') != -1
     - name: Add GPG key Docker.com (Debian|Astra Linux)
@@ -91,14 +91,24 @@
           - docker-ce
           - docker-ce-cli
           - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
         state: present
       async: 300
       poll: 20
-    - name: Install Docker compose
+    - name: Create folder {{ FOLDER_DOCKER_COMPOSE }}
+      become: true
+      ansible.builtin.file:
+        path: "{{ FOLDER_DOCKER_COMPOSE }}"
+        state: directory
+        mode: '0755'
+        owner: "root"
+        group: "root"
+    - name: Install Docker-compose v2
       become: true
       ansible.builtin.get_url:
-        url: "https://github.com/docker/compose/releases/download/{{ DOCKER_COMPOSE_VERSION }}/docker-compose-linux-x86_64"
-        dest: /usr/local/bin/docker-compose
+        url: "https://github.com/docker/compose/releases/download/{{ DOCKER_COMPOSE_VERSION }}/docker-compose-{{ DOCKER_COMPOSE_ARCHITECTURE }}"
+        dest: "{{ FOLDER_DOCKER_COMPOSE }}/docker-compose"
         mode: '0755'
     - name: In docker group add {{ ADMIN_USER }}
       become: true
